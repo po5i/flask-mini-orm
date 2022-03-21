@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
 
+
 class NotificationsModel(TypedDict):
     id: int
     description: Optional[str]
@@ -48,7 +49,7 @@ class Notifications(db.Model):  # type: ignore
 
     @classmethod
     def get_unread(cls) -> list[Notifications]:
-        return db.session.query(cls).filter(Notifications.read == False).all()
+        return db.session.query(cls).filter(Notifications.read.is_(False)).all()
 
 
 @app.route("/")
@@ -60,7 +61,10 @@ def index() -> Response:
 def notifications() -> Response:
     if request.method == "POST":
         new_notification = Notifications(
-            **dict(request.form, date=datetime.fromisoformat(request.form["date"]))
+            **dict(
+                request.form,
+                date=datetime.fromisoformat(request.form["date"])
+            )
         )
         db.session.add(new_notification)
         db.session.commit()
