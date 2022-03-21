@@ -35,6 +35,6 @@ jobs:
     - name: Type Check
       run: mypy ./*.py
 
-    - name: Run Tests
-      run: |
-        python -m pytest
+    # - name: Run Tests
+    #   run: |
+    #     python -m pytest
