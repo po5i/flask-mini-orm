@@ -2,7 +2,7 @@
 
 ![Actions Workflow](https://github.com/po5i/flask-mini-orm/workflows/Flask/badge.svg)
 
-This is a examle repository for [my article](https://dev.to/po5i/).
+This is a example repository for [my article](https://dev.to/po5i/how-to-add-type-annotations-to-sqlalchemy-models-376g).
 
 ## Setup
 
