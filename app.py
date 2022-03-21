@@ -61,10 +61,7 @@ def index() -> Response:
 def notifications() -> Response:
     if request.method == "POST":
         new_notification = Notifications(
-            **dict(
-                request.form,
-                date=datetime.fromisoformat(request.form["date"])
-            )
+            **dict(request.form, date=datetime.fromisoformat(request.form["date"]))
         )
         db.session.add(new_notification)
         db.session.commit()
