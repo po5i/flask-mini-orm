@@ -29,8 +29,8 @@ jobs:
         
     - name: Linter
       run: |
-        pylint *.py
-        pylint tests/
+        flake8 *.py
+        flake8 tests/
 
     - name: Type Check
       run: mypy ./*.py
