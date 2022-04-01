@@ -5,6 +5,7 @@ from typing import Optional, TypedDict
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from flask_sqlalchemy.model import DefaultMeta
 from werkzeug import Response
 
 
@@ -12,6 +13,8 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
 db = SQLAlchemy(app)
+
+BaseModel: DefaultMeta = db.Model
 
 
 class NotificationsModel(TypedDict):
@@ -23,7 +26,7 @@ class NotificationsModel(TypedDict):
     read: bool
 
 
-class Notifications(db.Model):  # type: ignore
+class Notifications(BaseModel):
     __tablename__ = "notifications"
 
     id = Column(Integer, primary_key=True, index=True)
